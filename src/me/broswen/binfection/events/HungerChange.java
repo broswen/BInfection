@@ -1,0 +1,14 @@
+package me.broswen.binfection.events;
+
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.entity.FoodLevelChangeEvent;
+
+public class HungerChange implements Listener{
+
+	@EventHandler
+	public void onHungerChange(FoodLevelChangeEvent event){
+		
+	}
+	
+}
