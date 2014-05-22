@@ -18,32 +18,18 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
-oswen.binfection.events.HungerChange;
-
-import me.broswen.binfection.events.PlayerJoin;
-import me.broswen.binfection.events.PlayerQuit;
-
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.event.Listener;
-import org.bukkit.plugin.PluginManager;
-import org.bukkit.plugin.java.JavaPlugin;
 
 public class BInfection extends JavaPlugin{
-	public static BInfection plugin;
 	
 	public static String lastInfected;
 	
 	public static Location playerSpawn, infectedSpawn, lobbySpawn;
 	
-	public boolean gameStarted, gameEnded, infectedStarted;
+	public static boolean gameStarted, gameEnded, infectedStarted;
 	
 	public static FileConfiguration config;
 	
-	public static int totalPlaying, totalAlive, totalInfected, TotalAlive;
+	public static int totalPlaying, totalAlive, totalInfected;
 	
 	public static ArrayList<String> players = new ArrayList<>();
 	public static ArrayList<String> alive = new ArrayList<>();
