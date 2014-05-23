@@ -2,6 +2,7 @@ package me.broswen.binfection;
 
 import java.util.ArrayList;
 
+import me.broswen.binfection.commands.InfectionCommand;
 import me.broswen.binfection.events.BlockBreak;
 import me.broswen.binfection.events.BlockPlace;
 import me.broswen.binfection.events.CommandPreProcess;
@@ -16,10 +17,13 @@ import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class BInfection extends JavaPlugin{
+	
+	static BInfection plugin;
 	
 	public static String lastInfected;
 	
@@ -38,6 +42,10 @@ public class BInfection extends JavaPlugin{
 	
 	public void onEnable(){
 		
+		plugin = this.plugin;
+		
+		config = this.getConfig();
+		
 		loadConfig();
 		
 		PluginManager pm = Bukkit.getPluginManager();
@@ -51,11 +59,11 @@ public class BInfection extends JavaPlugin{
 		pm.registerEvents(new PlayerJoin(), this);
 		pm.registerEvents(new PlayerQuit(), this);
 		
-		playerSpawn = new Location(Bukkit.getWorld(getConfig().getString("playerspawn.world")), getConfig().getDouble("playerspawn.X"), getConfig().getDouble("playerspawn.Y"), getConfig().getDouble("playerspawn.Z"));
-		infectedSpawn = new Location(Bukkit.getWorld(getConfig().getString("taggerspawn.world")), getConfig().getDouble("taggerspawn.X"), getConfig().getDouble("taggerspawn.Y"), getConfig().getDouble("taggerspawn.Z"));
-		lobbySpawn = new Location(Bukkit.getWorld(getConfig().getString("lobbyspawn.world")), getConfig().getDouble("lobbyspawn.X"), getConfig().getDouble("lobbyspawn.Y"), getConfig().getDouble("lobbyspawn.Z"));
+		this.getCommand("infection").setExecutor(new InfectionCommand(this));
 		
-		config = this.getConfig();
+		playerSpawn = new Location(Bukkit.getWorld(getConfig().getString("playerspawn.world")), getConfig().getDouble("playerspawn.X"), getConfig().getDouble("playerspawn.Y"), getConfig().getDouble("playerspawn.Z"));
+		infectedSpawn = new Location(Bukkit.getWorld(getConfig().getString("infectedspawn.world")), getConfig().getDouble("taggerspawn.X"), getConfig().getDouble("taggerspawn.Y"), getConfig().getDouble("taggerspawn.Z"));
+		lobbySpawn = new Location(Bukkit.getWorld(getConfig().getString("lobbyspawn.world")), getConfig().getDouble("lobbyspawn.X"), getConfig().getDouble("lobbyspawn.Y"), getConfig().getDouble("lobbyspawn.Z"));
 		
 		gameStarted = false;
 		gameEnded = false;
@@ -79,5 +87,9 @@ public class BInfection extends JavaPlugin{
 		getConfig().options().copyDefaults(true);
 		getConfig().options().copyHeader(true);
 		saveConfig();
+	}
+	
+	public static BInfection getInstance() {
+	    return (BInfection) Bukkit.getPluginManager().getPlugin("BInfection");
 	}
 }

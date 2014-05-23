@@ -1,0 +1,28 @@
+name: BInfection
+author: broswen
+version: 1.0
+main: me.broswen.binfection.BInfection
+description: a custom infection minigame
+
+commands:
+  infection:
+    description: the main command
+    
+permissions:
+  binfection.start:
+    description: allows you to start a game
+    default: op
+  binfection.stop:
+    description: allows you to stop a game
+    default: op
+  binfeciton.join:
+    description: allows you to joina game
+    default: true
+  binfection.leave:
+    description: allows you to leave the game
+    default: true
+  binfection.reload:
+    description: allows you to reload the config
+    default: op
+    
+  

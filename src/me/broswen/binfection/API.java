@@ -3,6 +3,7 @@ package me.broswen.binfection;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
+import org.bukkit.potion.PotionEffect;
 
 public class API {
 	
@@ -76,14 +77,32 @@ public class API {
 	public static void messageAllPlayers(String message){
 		for(Player player : Bukkit.getOnlinePlayers()){
 			if(isPlayer(player)){
-				player.sendMessage(ChatColor.DARK_GREEN + "[" + ChatColor.DARK_GRAY + "BInfection" + ChatColor.DARK_GREEN + "] " + ChatColor.RESET + "message");
+				player.sendMessage(ChatColor.DARK_GREEN + "[" + ChatColor.GRAY + "BInfection" + ChatColor.DARK_GREEN + "] " + ChatColor.RESET + message);
 			}
 		}
 	}
 	
 	//sends a message to a single player
 	public static void messageAPlayer(Player player, String message){
-		player.sendMessage(ChatColor.DARK_GREEN + "[" + ChatColor.DARK_GRAY + "BInfection" + ChatColor.DARK_GREEN + "] " + ChatColor.RESET + "message");
+		player.sendMessage(ChatColor.DARK_GREEN + "[" + ChatColor.GRAY + "BInfection" + ChatColor.DARK_GREEN + "] " + ChatColor.RESET + message);
+	}
+	
+	//resets a players inventory
+	public static void resetInventory(Player player){
+		player.getInventory().clear();
+		player.getInventory().getArmorContents().equals(null);
+	}
+	
+	//removes all potion effects from a player
+	public static void resetPotions(Player player){
+		
+		if(player.getActivePotionEffects() == null){
+			return;
+		}
+		
+		for (PotionEffect effect : player.getActivePotionEffects()){
+			player.removePotionEffect(effect.getType());
+		}
 	}
 	
 }
