@@ -2,7 +2,10 @@ package me.broswen.binfection;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 
 public class API {
@@ -90,7 +93,7 @@ public class API {
 	//resets a players inventory
 	public static void resetInventory(Player player){
 		player.getInventory().clear();
-		player.getInventory().getArmorContents().equals(null);
+		player.getInventory().setArmorContents(null);
 	}
 	
 	//removes all potion effects from a player
@@ -103,6 +106,28 @@ public class API {
 		for (PotionEffect effect : player.getActivePotionEffects()){
 			player.removePotionEffect(effect.getType());
 		}
+	}
+	
+	public static void giveInfectedItems(Player player){
+		Inventory inv = player.getInventory();
+		
+		player.getEquipment().setHelmet(new ItemStack(Material.LEATHER_HELMET));
+		player.getEquipment().setChestplate(new ItemStack(Material.LEATHER_CHESTPLATE));
+		player.getEquipment().setLeggings(new ItemStack(Material.LEATHER_LEGGINGS));
+		player.getEquipment().setBoots(new ItemStack(Material.LEATHER_BOOTS));
+		inv.addItem(new ItemStack(Material.STONE_SWORD));
+		inv.addItem(new ItemStack(Material.ANVIL));
+	}
+	
+	public static void giveAliveItems(Player player){
+		Inventory inv = player.getInventory();
+		
+		player.getEquipment().setHelmet(new ItemStack(Material.CHAINMAIL_HELMET));
+		player.getEquipment().setChestplate(new ItemStack(Material.CHAINMAIL_CHESTPLATE));
+		player.getEquipment().setLeggings(new ItemStack(Material.CHAINMAIL_LEGGINGS));
+		player.getEquipment().setBoots(new ItemStack(Material.CHAINMAIL_BOOTS));
+		inv.addItem(new ItemStack(Material.STONE_SWORD));
+		inv.addItem(new ItemStack(Material.REDSTONE_BLOCK));
 	}
 	
 }

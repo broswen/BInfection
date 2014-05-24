@@ -6,9 +6,12 @@ import me.broswen.binfection.commands.InfectionCommand;
 import me.broswen.binfection.events.BlockBreak;
 import me.broswen.binfection.events.BlockPlace;
 import me.broswen.binfection.events.CommandPreProcess;
+import me.broswen.binfection.events.DropItem;
 import me.broswen.binfection.events.EntityDamageByEntity;
-import me.broswen.binfection.events.EntityDeath;
 import me.broswen.binfection.events.HungerChange;
+import me.broswen.binfection.events.InventoryClick;
+import me.broswen.binfection.events.PickupItem;
+import me.broswen.binfection.events.PlayerDeath;
 import me.broswen.binfection.events.PlayerJoin;
 import me.broswen.binfection.events.PlayerQuit;
 
@@ -17,7 +20,6 @@ import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -54,15 +56,18 @@ public class BInfection extends JavaPlugin{
 		pm.registerEvents(new BlockPlace(), this);
 		pm.registerEvents(new CommandPreProcess(), this);
 		pm.registerEvents(new EntityDamageByEntity(), this);
-		pm.registerEvents(new EntityDeath(), this);
+		pm.registerEvents(new PlayerDeath(), this);
 		pm.registerEvents(new HungerChange(), this);
 		pm.registerEvents(new PlayerJoin(), this);
 		pm.registerEvents(new PlayerQuit(), this);
+		pm.registerEvents(new InventoryClick(), this);
+		pm.registerEvents(new PickupItem(), this);
+		pm.registerEvents(new DropItem(), this);
 		
 		this.getCommand("infection").setExecutor(new InfectionCommand(this));
 		
 		playerSpawn = new Location(Bukkit.getWorld(getConfig().getString("playerspawn.world")), getConfig().getDouble("playerspawn.X"), getConfig().getDouble("playerspawn.Y"), getConfig().getDouble("playerspawn.Z"));
-		infectedSpawn = new Location(Bukkit.getWorld(getConfig().getString("infectedspawn.world")), getConfig().getDouble("taggerspawn.X"), getConfig().getDouble("taggerspawn.Y"), getConfig().getDouble("taggerspawn.Z"));
+		infectedSpawn = new Location(Bukkit.getWorld(getConfig().getString("infectedspawn.world")), getConfig().getDouble("infectedspawn.X"), getConfig().getDouble("infectedspawn.Y"), getConfig().getDouble("infectedspawn.Z"));
 		lobbySpawn = new Location(Bukkit.getWorld(getConfig().getString("lobbyspawn.world")), getConfig().getDouble("lobbyspawn.X"), getConfig().getDouble("lobbyspawn.Y"), getConfig().getDouble("lobbyspawn.Z"));
 		
 		gameStarted = false;

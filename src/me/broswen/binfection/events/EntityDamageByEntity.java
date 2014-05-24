@@ -18,7 +18,6 @@ public class EntityDamageByEntity implements Listener{
 			Player damager = (Player) event.getDamager();
 			
 			if(API.isPlayer(player) && !API.isPlayer(damager)){
-				
 				event.setCancelled(true);
 				return;
 			}
@@ -29,6 +28,16 @@ public class EntityDamageByEntity implements Listener{
 			}
 			
 			if(API.isPlayer(damager) && !BInfection.gameStarted){
+				event.setCancelled(true);
+				return;
+			}
+			
+			if(API.isInfected(player) && API.isInfected(damager)){
+				event.setCancelled(true);
+				return;
+			}
+			
+			if(API.isAlive(player) && API.isAlive(damager)){
 				event.setCancelled(true);
 				return;
 			}
