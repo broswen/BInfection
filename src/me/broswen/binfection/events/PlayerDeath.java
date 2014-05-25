@@ -43,8 +43,8 @@ public class PlayerDeath implements Listener{
 				API.removeFromAlive(player);
 				player.setVelocity(new Vector(0, 0, 0));
 				player.teleport(BInfection.infectedSpawn);
-				API.giveInfectedItems(player);
 				player.setHealth(20.0);
+				API.giveInfectedItems(player);
 			}
 			
 			if(API.isInfected(player)){
@@ -55,17 +55,8 @@ public class PlayerDeath implements Listener{
 				player.setVelocity(new Vector(0, 0, 0));
 				player.setHealth(20.0);
 				player.teleport(BInfection.infectedSpawn);
-				
-				Bukkit.getScheduler().scheduleSyncDelayedTask(BInfection.getInstance(), new Runnable(){
-
-					@Override
-					public void run() {
-						API.giveInfectedItems(player);
-					}
-					
-				}, 1L);
+				API.giveInfectedItems(player);
 			}
-			
 			
 			if(BInfection.totalPlaying < BInfection.config.getInt("min-players")){
 				GameManager.endGame();
@@ -74,6 +65,7 @@ public class PlayerDeath implements Listener{
 			
 			if(BInfection.totalAlive <= 0){
 				GameManager.endGame();
+				return;
 			}
 			
 			if(BInfection.totalInfected <= 0){

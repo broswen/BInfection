@@ -112,6 +112,22 @@ public class InfectionCommand implements CommandExecutor{
 				API.removeFromInfected(player);
 				
 				API.messageAllPlayers(player.getName() + " has left the game! [" + BInfection.totalPlaying + "/" + BInfection.config.getInt("max-players") + "]");
+				
+				if(BInfection.totalPlaying < BInfection.config.getInt("min-players") && BInfection.gameStarted){
+					GameManager.endGame();
+					return true;
+				}
+				
+				if(BInfection.totalAlive <= 0 && BInfection.gameStarted){
+					GameManager.endGame();
+					return true;
+				}
+				
+				if(BInfection.totalInfected <= 0 && BInfection.gameStarted){
+					GameManager.endGame();
+					return true;
+				}
+				
 				return true;
 			}
 			

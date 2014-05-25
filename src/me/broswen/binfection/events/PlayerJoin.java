@@ -17,6 +17,7 @@ public class PlayerJoin implements Listener{
 		
 		if(!BInfection.gameStarted){
 			API.addToPlayers(player);
+			event.setJoinMessage(null);
 			API.messageAllPlayers(player.getName() + " has joined the game! [" + BInfection.totalPlaying + "/" + BInfection.config.getInt("max-players") + "]");
 			player.teleport(BInfection.lobbySpawn);
 			

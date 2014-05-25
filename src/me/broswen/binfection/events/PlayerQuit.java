@@ -22,22 +22,23 @@ public class PlayerQuit implements Listener{
 		API.removeFromPlayers(player);
 		API.removeFromInfected(player);
 		API.removeFromAlive(player);
+		event.setQuitMessage(null);
 		API.messageAllPlayers(player.getName() + " has left the game! [" + BInfection.totalPlaying + "/" + BInfection.config.getInt("max-players") + "]");
 		player.teleport(BInfection.lobbySpawn);
 		API.resetInventory(player);
 		API.resetPotions(player);
 		
-		if(BInfection.totalPlaying < BInfection.config.getInt("min-players")){
+		if(BInfection.totalPlaying < BInfection.config.getInt("min-players") && BInfection.gameStarted){
 			GameManager.endGame();
 			return;
 		}
 		
-		if(BInfection.totalAlive <= 0){
+		if(BInfection.totalAlive <= 0 && BInfection.gameStarted){
 			GameManager.endGame();
 			return;
 		}
 		
-		if(BInfection.totalInfected <= 0){
+		if(BInfection.totalInfected <= 0 && BInfection.gameStarted){
 			GameManager.endGame();
 			return;
 		}

@@ -12,6 +12,7 @@ import me.broswen.binfection.events.HungerChange;
 import me.broswen.binfection.events.InventoryClick;
 import me.broswen.binfection.events.PickupItem;
 import me.broswen.binfection.events.PlayerDeath;
+import me.broswen.binfection.events.PlayerInteract;
 import me.broswen.binfection.events.PlayerJoin;
 import me.broswen.binfection.events.PlayerQuit;
 
@@ -43,7 +44,8 @@ public class BInfection extends JavaPlugin{
 	public static ArrayList<String> players = new ArrayList<>();
 	public static ArrayList<String> alive = new ArrayList<>();
 	public static ArrayList<String> infected = new ArrayList<>();
-	public static ArrayList<String> kills = new ArrayList<>();
+	public static ArrayList<String> regenerationCooldown = new ArrayList<>();
+	public static ArrayList<String> resistanceCooldown = new ArrayList<>();
 	
 	public void onEnable(){
 		
@@ -66,6 +68,7 @@ public class BInfection extends JavaPlugin{
 		pm.registerEvents(new InventoryClick(), this);
 		pm.registerEvents(new PickupItem(), this);
 		pm.registerEvents(new DropItem(), this);
+		pm.registerEvents(new PlayerInteract(), this);
 		
 		this.getCommand("infection").setExecutor(new InfectionCommand(this));
 		

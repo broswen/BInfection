@@ -121,8 +121,8 @@ public class API {
 	}
 	
 	//gives the infected player items
-	public static void giveInfectedItems(Player player){
-		Inventory inv = player.getInventory();
+	public static void giveInfectedItems(final Player player){
+		final Inventory inv = player.getInventory();
 		
 		player.getEquipment().setHelmet(new ItemStack(Material.LEATHER_HELMET));
 		player.getEquipment().setChestplate(new ItemStack(Material.LEATHER_CHESTPLATE));
@@ -152,5 +152,45 @@ public class API {
             }
 		}
 	}
+	
+	//adds a player to the regenerationCooldown arraylist
+	public static void addToRegenerationCooldown(Player player){
+		BInfection.regenerationCooldown.add(player.getName());
+	}
+	
+	//removes a player from the regenerationCooldown arraylist
+	public static void removeFromRegenerationCooldown(Player player){
+		if(BInfection.regenerationCooldown.contains(player.getName())){
+			BInfection.regenerationCooldown.remove(player.getName());
+		}
+	}
+	
+	//returns if a player is in the regenerationCooldown arraylist
+	public static boolean isRegenerationCooldown(Player player){
+		if(BInfection.regenerationCooldown.contains(player.getName())){
+			return true;
+		}
+		return false;
+	}
+	
+	//adds a player to the resistanceCooldown arraylist
+		public static void addToResistanceCooldown(Player player){
+			BInfection.resistanceCooldown.add(player.getName());
+		}
+		
+		//removes a player from the regenerationCooldown arraylist
+		public static void removeFromResistanceCooldown(Player player){
+			if(BInfection.resistanceCooldown.contains(player.getName())){
+				BInfection.resistanceCooldown.remove(player.getName());
+			}
+		}
+		
+		//returns if a player is in the regenerationCooldown arraylist
+		public static boolean isResistanceCooldown(Player player){
+			if(BInfection.resistanceCooldown.contains(player.getName())){
+				return true;
+			}
+			return false;
+		}
 	
 }
