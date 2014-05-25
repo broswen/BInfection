@@ -1,8 +1,16 @@
 package me.broswen.binfection;
 
+import me.libraryaddict.disguise.DisguiseAPI;
+import me.libraryaddict.disguise.disguisetypes.DisguiseType;
+import me.libraryaddict.disguise.disguisetypes.MobDisguise;
+import me.libraryaddict.disguise.disguisetypes.PlayerDisguise;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.World;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -58,6 +66,8 @@ public class API {
 	public static void addToInfected(Player player){
 		BInfection.infected.add(player.getName());
 		BInfection.totalInfected++;
+		MobDisguise mobDisguise = new MobDisguise(DisguiseType.ZOMBIE, true, true);
+		DisguiseAPI.disguiseToAll(player, mobDisguise);
 	}
 	
 	//removes a player from the infected arraylist
@@ -65,6 +75,8 @@ public class API {
 		if(BInfection.infected.contains(player.getName())){
 			BInfection.infected.remove(player.getName());
 			BInfection.totalInfected--;
+			PlayerDisguise playerDisguise = new PlayerDisguise(player.getName());
+			DisguiseAPI.disguiseToAll(player, playerDisguise);
 		}
 	}
 	
@@ -108,6 +120,7 @@ public class API {
 		}
 	}
 	
+	//gives the infected player items
 	public static void giveInfectedItems(Player player){
 		Inventory inv = player.getInventory();
 		
@@ -119,6 +132,7 @@ public class API {
 		inv.addItem(new ItemStack(Material.ANVIL));
 	}
 	
+	//gives the alive player items
 	public static void giveAliveItems(Player player){
 		Inventory inv = player.getInventory();
 		
@@ -128,6 +142,15 @@ public class API {
 		player.getEquipment().setBoots(new ItemStack(Material.CHAINMAIL_BOOTS));
 		inv.addItem(new ItemStack(Material.STONE_SWORD));
 		inv.addItem(new ItemStack(Material.REDSTONE_BLOCK));
+	}
+	
+	//clears items off the ground
+	public static void clearWorldItems(World world){
+		for(Entity current : world.getEntities()){
+            if (current instanceof Item){
+            	current.remove();
+            }
+		}
 	}
 	
 }

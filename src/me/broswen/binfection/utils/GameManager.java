@@ -1,5 +1,6 @@
 package me.broswen.binfection.utils;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 
 import me.broswen.binfection.API;
@@ -17,6 +18,7 @@ public class GameManager {
 	public static void endGame(){
 		
 		API.messageAllPlayers(ChatColor.YELLOW + "The game has ended!");
+		SpawnHandler.teleportToLobbySpawn();
 		
 		BInfection.alive.clear();
 		BInfection.infected.clear();
@@ -27,8 +29,7 @@ public class GameManager {
 		BInfection.infectedStarted = false;
 		BInfection.gameEnded = true;
 		BInfection.gameStarted = false;
-		
-		SpawnHandler.teleportToLobbySpawn();
+		API.clearWorldItems(BInfection.gameWorld);
 	}
 	
 }

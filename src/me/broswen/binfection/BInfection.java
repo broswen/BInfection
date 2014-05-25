@@ -17,6 +17,7 @@ import me.broswen.binfection.events.PlayerQuit;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -28,6 +29,8 @@ public class BInfection extends JavaPlugin{
 	static BInfection plugin;
 	
 	public static String lastInfected;
+	
+	public static World gameWorld;
 	
 	public static Location playerSpawn, infectedSpawn, lobbySpawn;
 	
@@ -66,6 +69,7 @@ public class BInfection extends JavaPlugin{
 		
 		this.getCommand("infection").setExecutor(new InfectionCommand(this));
 		
+		gameWorld = Bukkit.getWorld(getConfig().getString("playerspawn.world"));
 		playerSpawn = new Location(Bukkit.getWorld(getConfig().getString("playerspawn.world")), getConfig().getDouble("playerspawn.X"), getConfig().getDouble("playerspawn.Y"), getConfig().getDouble("playerspawn.Z"));
 		infectedSpawn = new Location(Bukkit.getWorld(getConfig().getString("infectedspawn.world")), getConfig().getDouble("infectedspawn.X"), getConfig().getDouble("infectedspawn.Y"), getConfig().getDouble("infectedspawn.Z"));
 		lobbySpawn = new Location(Bukkit.getWorld(getConfig().getString("lobbyspawn.world")), getConfig().getDouble("lobbyspawn.X"), getConfig().getDouble("lobbyspawn.Y"), getConfig().getDouble("lobbyspawn.Z"));

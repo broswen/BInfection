@@ -30,6 +30,10 @@ public class SpawnHandler {
 				API.resetInventory(player);
 				API.resetPotions(player);
 			}
+			
+			if(API.isInfected(player)){
+				API.removeFromInfected(player);
+			}
 		}
 	}
 	

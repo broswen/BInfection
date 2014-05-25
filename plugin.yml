@@ -4,6 +4,8 @@ version: 1.0
 main: me.broswen.binfection.BInfection
 description: a custom infection minigame
 
+depend: [ProtocolLib, LibsDisguises]
+
 commands:
   infection:
     description: the main command
